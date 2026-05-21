@@ -1,5 +1,7 @@
 const works = {
   exhibitions: [
+    { year: "2025", title: "Facing, Questioning, Responding", venue: "The Question Society: Philosophy Festa", org: "Taumazein Foundation & Korean Philosophical Association", location: "Haebangchon, Seoul" },
+    { year: "2025", title: "Bookstore Log Exhibition (책방일지展)", venue: "2nd Unknown Book Festival, Corner Room", org: "Special Curated Exhibition", location: "Incheon" },
     { year: "2025", title: "Designing the Strange", venue: "Dongdaemun Festival: Party, Not Art", org: "Dongdaemun Cultural Foundation", location: "Seoul" },
     { year: "2025", title: "Too Slow to Follow, Too Weak to Neglect", venue: "WWW SPACE 2", org: "Solo", location: "Seoul" },
     { year: "2024", title: "Baedari Independent: Walking through the Village", venue: "Public Art Grant", org: "Incheon Dong-gu Office", location: "Incheon" },
