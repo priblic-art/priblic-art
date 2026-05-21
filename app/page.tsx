@@ -3,22 +3,22 @@ import Link from "next/link";
 
 const featuredWorks = [
   {
+    title: "Too Slow to Follow, Too Weak to Neglect",
+    desc: "2025, Solo, WWW Space 2",
+    image: "/works/IMG_3149-24279.JPG",
+    href: "/work/too-slow-to-follow",
+  },
+  {
+    title: "Designing the Strange",
+    desc: "2025, Dongdaemun Festival",
+    image: "/works/IMG_4829-24170.JPG",
+    href: "/work/designing-the-strange",
+  },
+  {
     title: "Self-Portrait",
     desc: "2014–2016",
     image: "/works/Selfportrait_01-20718.jpg",
-    href: "/work",
-  },
-  {
-    title: "Ever After: Tomb of King Muryeong",
-    desc: "2021, ARKO Young Artist Grant",
-    image: "/works/EA_10-21943.jpg",
-    href: "/work",
-  },
-  {
-    title: "Can'titled",
-    desc: "2018, Oxo Tower Wharf, London",
-    image: "/works/Installation Display-21441.jpg",
-    href: "/work",
+    href: "/work/self-portrait",
   },
 ];
 

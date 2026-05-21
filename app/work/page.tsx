@@ -1,3 +1,23 @@
+import Link from "next/link";
+import { projects } from "./projects";
+
+const slugByTitle = new Map(projects.map((p) => [p.title, p.slug]));
+
+// Helper to normalize titles for matching (some CV titles are shortened)
+const slugMap: Record<string, string> = {
+  "Too Slow to Follow, Too Weak to Neglect": "too-slow-to-follow",
+  "Designing the Strange": "designing-the-strange",
+  "Bookstore Log Exhibition (책방일지展)": "bookstore-log",
+  "Ever After: Tomb of King Muryeong": "ever-after",
+  "Iumsae (The Seam)": "iumsae",
+  "Story, Aolda": "story-aolda",
+  "Can'titled": "cantitled",
+};
+
+function getSlug(title: string): string | undefined {
+  return slugMap[title] ?? slugByTitle.get(title);
+}
+
 const works = {
   exhibitions: [
     { year: "2025", title: "Facing, Questioning, Responding", venue: "The Question Society: Philosophy Festa", org: "Taumazein Foundation & Korean Philosophical Association", location: "Haebangchon, Seoul" },
@@ -42,10 +62,23 @@ const works = {
   ],
 };
 
-function Section({ title, subtitle, items }: {
+type Item = {
+  year: string;
+  title: string;
+  org?: string;
+  venue?: string;
+  role?: string;
+  location?: string;
+};
+
+function Section({
+  title,
+  subtitle,
+  items,
+}: {
   title: string;
   subtitle: string;
-  items: { year: string; title: string; org?: string; venue?: string; role?: string; location?: string }[];
+  items: Item[];
 }) {
   return (
     <section className="py-16 border-t border-stone-900">
@@ -54,24 +87,39 @@ function Section({ title, subtitle, items }: {
         <h2 className="font-kr text-2xl">{title}</h2>
       </div>
       <div className="space-y-px">
-        {items.map((item, i) => (
-          <div
-            key={i}
-            className="flex flex-col md:flex-row md:items-start gap-2 md:gap-12 py-4 border-b border-stone-900/50 hover:bg-stone-900/40 px-2 -mx-2 transition-colors"
-          >
-            <span className="text-xs text-stone-600 tabular-nums shrink-0 w-28 pt-0.5">
-              {item.year}
-            </span>
-            <div className="flex-1">
-              <p className="font-kr text-base mb-0.5">{item.title}</p>
-              <p className="text-xs text-stone-500">
-                {[item.venue, item.org, item.role, item.location]
-                  .filter(Boolean)
-                  .join(" · ")}
-              </p>
+        {items.map((item, i) => {
+          const slug = getSlug(item.title);
+          const meta = [item.venue, item.org, item.role, item.location]
+            .filter(Boolean)
+            .join(" · ");
+          const inner = (
+            <>
+              <span className="text-xs text-stone-600 tabular-nums shrink-0 w-28 pt-0.5">
+                {item.year}
+              </span>
+              <div className="flex-1">
+                <p className="font-kr text-base mb-0.5">{item.title}</p>
+                <p className="text-xs text-stone-500">{meta}</p>
+              </div>
+              {slug && (
+                <span className="text-stone-700 text-xs shrink-0 self-center">→</span>
+              )}
+            </>
+          );
+
+          const cls =
+            "flex flex-col md:flex-row md:items-start gap-2 md:gap-12 py-4 border-b border-stone-900/50 hover:bg-stone-900/40 px-2 -mx-2 transition-colors";
+
+          return slug ? (
+            <Link key={i} href={`/work/${slug}`} className={cls}>
+              {inner}
+            </Link>
+          ) : (
+            <div key={i} className={cls}>
+              {inner}
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </section>
   );
