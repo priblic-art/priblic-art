@@ -1,12 +1,44 @@
+import Image from "next/image";
 import Link from "next/link";
+
+const featuredWorks = [
+  {
+    title: "Self-Portrait",
+    desc: "2014–2016",
+    image: "/works/Selfportrait_01-20718.jpg",
+    href: "/work",
+  },
+  {
+    title: "Ever After: Tomb of King Muryeong",
+    desc: "2021, ARKO Young Artist Grant",
+    image: "/works/EA_10-21943.jpg",
+    href: "/work",
+  },
+  {
+    title: "Can'titled",
+    desc: "2018, Oxo Tower Wharf, London",
+    image: "/works/Installation Display-21441.jpg",
+    href: "/work",
+  },
+];
 
 export default function Home() {
   return (
     <main>
       {/* 히어로 */}
-      <section className="min-h-screen flex flex-col justify-between px-8 pt-32 pb-12">
-        <div />
-        <div>
+      <section className="relative min-h-screen flex flex-col justify-between px-8 pt-32 pb-12 overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/works/EA_10-21943.jpg"
+            alt="Ever After: Tomb of King Muryeong"
+            fill
+            className="object-cover opacity-20"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/60 to-transparent" />
+        </div>
+        <div className="relative z-10" />
+        <div className="relative z-10">
           <h1 className="font-kr text-4xl md:text-6xl lg:text-7xl leading-snug max-w-4xl mb-10">
             장비치는 &lsquo;나&rsquo;를 말하는 일이
             <br />
@@ -16,16 +48,16 @@ export default function Home() {
           </h1>
           <Link
             href="/work"
-            className="text-sm text-stone-500 hover:text-[#f0ede8] transition-colors"
+            className="text-sm text-stone-400 hover:text-[#f0ede8] transition-colors"
           >
             작업 보기 →
           </Link>
         </div>
-        <div className="flex items-end justify-between mt-16">
-          <span className="text-xs text-stone-800 tracking-[0.3em] uppercase">
+        <div className="relative z-10 flex items-end justify-between mt-16">
+          <span className="text-xs text-stone-700 tracking-[0.3em] uppercase">
             priblic art
           </span>
-          <span className="text-xs text-stone-800">2026</span>
+          <span className="text-xs text-stone-700">2026</span>
         </div>
       </section>
 
@@ -55,20 +87,26 @@ export default function Home() {
           </Link>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-stone-900">
-          {[
-            { label: "자화상", desc: "자기고백 시리즈" },
-            { label: "공공작업", desc: "도시와 사람" },
-            { label: "공동창작", desc: "다른 시선 포개기" },
-          ].map((item) => (
-            <div
-              key={item.label}
-              className="bg-[#0a0a0a] aspect-square p-8 flex flex-col justify-end hover:bg-stone-900 transition-colors cursor-pointer"
+          {featuredWorks.map((work) => (
+            <Link
+              key={work.title}
+              href={work.href}
+              className="group relative bg-[#0a0a0a] aspect-square overflow-hidden"
             >
-              <p className="text-xs text-stone-600 tracking-widest uppercase mb-2">
-                {item.desc}
-              </p>
-              <p className="text-lg font-kr">{item.label}</p>
-            </div>
+              <Image
+                src={work.image}
+                alt={work.title}
+                fill
+                className="object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-6">
+                <p className="text-xs text-stone-500 tracking-widest uppercase mb-1">
+                  {work.desc}
+                </p>
+                <p className="text-base font-kr text-[#f0ede8]">{work.title}</p>
+              </div>
+            </Link>
           ))}
         </div>
       </section>

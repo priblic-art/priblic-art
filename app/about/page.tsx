@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const awards = [
   { year: "2022", title: "Village Workshop Development Grant", org: "Ministry of the Interior and Safety", detail: "Regeneration Project: 'Sabujak Sabujak Ium Workshop', Yangpyeong" },
   { year: "2017", title: "Steward Fellowship Award", org: "British Council", detail: "British Pavilion at the Venice Biennale" },
@@ -16,10 +18,20 @@ const education = [
 export default function AboutPage() {
   return (
     <main className="px-8 pt-32 pb-24 max-w-3xl">
-      <div className="mb-16">
-        <p className="text-xs text-stone-600 tracking-[0.3em] uppercase mb-4">소개</p>
-        <h1 className="font-kr text-4xl md:text-5xl mb-2">장비치</h1>
-        <p className="text-stone-500 text-sm tracking-wider">Bee Chee Chang</p>
+      <div className="mb-16 flex flex-col md:flex-row md:items-end gap-10">
+        <div className="relative w-48 h-60 shrink-0 overflow-hidden">
+          <Image
+            src="/works/Selfportrait_01-20718.jpg"
+            alt="Bee Chee Chang"
+            fill
+            className="object-cover object-top grayscale"
+          />
+        </div>
+        <div>
+          <p className="text-xs text-stone-600 tracking-[0.3em] uppercase mb-4">소개</p>
+          <h1 className="font-kr text-4xl md:text-5xl mb-2">장비치</h1>
+          <p className="text-stone-500 text-sm tracking-wider">Bee Chee Chang</p>
+        </div>
       </div>
 
       <section className="border-t border-stone-900 pt-12 mb-16 space-y-5 text-stone-300 leading-relaxed text-lg">
